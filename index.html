@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Bestiee ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,80,170,.25),transparent 30%),
+    radial-gradient(circle at 90% 80%,rgba(150,70,255,.22),transparent 30%),
+    linear-gradient(135deg,#100018,#24052f 50%,#0e0018);
+  overflow-x:hidden;
+}
+section{
+  min-height:100vh;
+  padding:80px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  isolation:isolate;
+}
+section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center,rgba(255,255,255,.035),transparent 60%);
+  pointer-events:none;
+  z-index:-1;
+}
+.container{width:100%;max-width:1050px;margin:auto;text-align:center}
+.hero{
+  min-height:100svh;
+  background:
+    linear-gradient(rgba(15,0,25,.50),rgba(15,0,25,.90)),
+    url("photos/background.jpg") center/cover no-repeat;
+}
+.small-text,.section-title,.music-title,.caption,.scroll,.name{
+  font-family:"Dancing Script",cursive;
+}
+.small-text{font-size:1.5rem;color:#ffc1e5;margin-bottom:18px}
+.hero h1{
+  font-family:"Dancing Script",cursive;
+  font-size:clamp(3rem,11vw,6.8rem);
+  line-height:1;
+  text-shadow:0 0 12px #ff4da6,0 0 35px #ff4da6;
+}
+.name{
+  font-family:"Great Vibes",cursive;
+  font-size:clamp(3.8rem,12vw,7rem);
+  color:#ff8aca;
+  margin:24px 0;
+  line-height:1.1;
+  text-shadow:0 0 12px #ff4da6,0 0 40px #ff4da6;
+}
+.intro{
+  max-width:760px;
+  margin:auto;
+  font-size:1.3rem;
+  line-height:1.8;
+  color:#f9e3f1;
+}
+.music-box{
+  width:min(100%,560px);
+  margin:34px auto 0;
+  padding:24px;
+  border-radius:28px;
+  background:rgba(255,255,255,.09);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+.music-title{font-size:1.9rem;color:#ffd5ea;margin-bottom:6px}
+.music-info{font-size:1.1rem;color:#f3cfe4;margin-bottom:16px}
+button{
+  border:0;
+  border-radius:999px;
+  padding:13px 28px;
+  font:700 1.25rem "Dancing Script",cursive;
+  color:white;
+  background:linear-gradient(135deg,#ff3f98,#ff76ba);
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(255,63,152,.35);
+  transition:.25s ease;
+}
+button:hover{transform:translateY(-2px) scale(1.04)}
+button:active{transform:scale(.98)}
+.youtube-player{
+  display:none;
+  width:100%;
+  margin-top:18px;
+  border-radius:18px;
+  overflow:hidden;
+  aspect-ratio:16/9;
+  background:#000;
+}
+.youtube-player iframe{width:100%;height:100%;border:0}
+.scroll{margin-top:35px;color:#ffacd8;font-size:1.3rem}
+
+.section-title{
+  font-size:clamp(2.6rem,9vw,4.4rem);
+  color:#ff72b9;
+  margin-bottom:12px;
+  text-shadow:0 0 20px #ff3f98;
+}
+.section-subtitle{font-size:1.4rem;color:#e8c9df;margin-bottom:38px}
+.questions{background:rgba(0,0,0,.14)}
+#questionsContainer{width:100%}
+.question-card{
+  max-width:760px;
+  width:100%;
+  margin:20px auto;
+  padding:24px;
+  border-radius:22px;
+  background:rgba(255,255,255,.075);
+  border:1px solid rgba(255,105,180,.3);
+  text-align:left;
+  backdrop-filter:blur(10px);
+}
+.question-card h3{
+  font:600 1.55rem "Dancing Script",cursive;
+  color:#ffd1e9;
+  margin-bottom:15px;
+}
+.answer{
+  display:flex;
+  align-items:center;
+  margin:9px 0;
+  padding:13px 15px;
+  border-radius:13px;
+  background:rgba(255,255,255,.075);
+  cursor:pointer;
+  transition:.2s;
+  font-size:1.15rem;
+}
+.answer:hover{background:rgba(255,63,152,.3);transform:translateX(4px)}
+.answer input{margin-right:10px;accent-color:#ff3f98;width:18px;height:18px;flex-shrink:0}
+.submit-btn{margin-top:22px}
+#answerResult{margin-top:20px;color:#ffacd8;font-size:1.3rem;font-weight:bold;min-height:30px}
+#quizLoadingNote{color:#e8c9df;font-size:1.05rem;margin-top:10px}
+
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:24px;
+  align-items:start;
+}
+.memory{
+  background:#fff;
+  padding:9px;
+  border-radius:18px;
+  box-shadow:0 18px 45px rgba(0,0,0,.45);
+  transition:.3s ease;
+}
+.memory:nth-child(odd){transform:rotate(-1.2deg)}
+.memory:nth-child(even){transform:rotate(1.2deg)}
+.memory:hover{transform:translateY(-5px) rotate(0);z-index:5}
+.memory img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:620px;
+  object-fit:contain;
+  object-position:center;
+  background:#f7edf4;
+  border-radius:12px;
+}
+.caption{
+  color:#7b2859;
+  padding:11px 8px 8px;
+  font-size:1.2rem;
+  font-weight:bold;
+}
+.cake{font-size:120px;margin:25px;filter:drop-shadow(0 0 25px rgba(255,100,180,.5))}
+.wish-text{font-size:1.3rem;color:#f5d9eb;line-height:1.8;max-width:650px;margin:auto}
+.wish-btn{margin-top:25px}
+.final{
+  min-height:100svh;
+  background:
+    linear-gradient(rgba(20,0,30,.62),rgba(20,0,30,.92)),
+    url("photos/final.jpg") center/cover no-repeat;
+}
+.message-box{
+  max-width:800px;
+  margin:auto;
+  padding:42px 28px;
+  border-radius:30px;
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,105,180,.3);
+  box-shadow:0 20px 70px rgba(0,0,0,.4);
+}
+.message-box p{font-size:1.3rem;line-height:2;color:#f9e1ef}
+.signature{font:2.2rem "Great Vibes",cursive;margin-top:28px;color:#ff75bb}
+.heart{
+  position:fixed;
+  bottom:-50px;
+  font-size:20px;
+  animation:floatHeart 8s linear infinite;
+  opacity:.7;
+  z-index:0;
+  pointer-events:none;
+}
+@keyframes floatHeart{
+  0%{transform:translateY(0) rotate(0);opacity:0}
+  20%{opacity:.8}
+  100%{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+.confetti{
+  position:fixed;
+  top:-20px;
+  width:10px;height:18px;
+  z-index:100;
+  pointer-events:none;
+  animation:fall 4s linear forwards;
+}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+@media(max-width:700px){
+  section{padding:65px 13px}
+  .hero{padding-top:50px}
+  .intro{font-size:1.08rem;line-height:1.65}
+  .music-box{padding:19px}
+  .memory-grid{grid-template-columns:1fr;gap:20px}
+  .memory img{max-height:none}
+  .question-card{padding:18px}
+  .question-card h3{font-size:1.4rem}
+  .answer{font-size:1.05rem}
+  .cake{font-size:90px}
+  .message-box{padding:30px 19px}
+  .message-box p{font-size:1.12rem;line-height:1.85}
+}
+
+
+#lockScreen{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,80,170,.28),transparent 35%),
+    radial-gradient(circle at 90% 85%,rgba(150,70,255,.26),transparent 35%),
+    linear-gradient(135deg,#100018,#24052f 50%,#0e0018);
+  transition:opacity .5s ease, visibility .5s ease;
+}
+#lockScreen.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.lock-card{
+  width:100%;
+  max-width:440px;
+  text-align:center;
+  padding:44px 30px;
+  border-radius:28px;
+  background:rgba(255,255,255,.09);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 20px 70px rgba(0,0,0,.45), 0 0 60px rgba(255,63,152,.15);
+}
+.lock-icon{
+  font-size:3.2rem;
+  margin-bottom:14px;
+  filter:drop-shadow(0 0 18px rgba(255,100,180,.7));
+}
+.lock-title{
+  font-family:"Dancing Script",cursive;
+  font-weight:700;
+  font-size:clamp(1.9rem,7vw,2.5rem);
+  color:#ff8aca;
+  text-shadow:0 0 12px #ff4da6,0 0 30px #ff4da6;
+  margin-bottom:10px;
+}
+.lock-subtitle{
+  font-size:1.15rem;
+  color:#f3cfe4;
+  margin-bottom:26px;
+  line-height:1.6;
+}
+#passwordInput{
+  width:100%;
+  padding:14px 18px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.15rem;
+  text-align:center;
+  outline:none;
+  margin-bottom:18px;
+  transition:.2s;
+}
+#passwordInput::placeholder{color:rgba(255,255,255,.55)}
+#passwordInput:focus{
+  border-color:#ff76ba;
+  box-shadow:0 0 0 3px rgba(255,63,152,.25);
+  background:rgba(255,255,255,.12);
+}
+.unlock-btn{width:100%}
+#lockError{
+  margin-top:16px;
+  min-height:26px;
+  color:#ffb3d1;
+  font-size:1.1rem;
+  font-weight:bold;
+}
+#lockError.shake{
+  animation:shakeError .4s ease;
+}
+@keyframes shakeError{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)}
+  60%{transform:translateX(-6px)}
+  80%{transform:translateX(6px)}
+}
+#siteContent{display:none}
+#siteContent.revealed{display:block}
+
+@media(max-width:700px){
+  .lock-card{padding:34px 22px}
+  .lock-icon{font-size:2.6rem}
+}
+</style>
+</head>
+
+<body>
+
+<div id="lockScreen">
+  <div class="lock-card">
+    <div class="lock-icon">🔐</div>
+    <div class="lock-title">A Little Surprise For You ❤️</div>
+    <p class="lock-subtitle">Enter the secret password to unlock your surprise 🎁</p>
+    <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="off">
+    <button type="button" class="unlock-btn" id="unlockButton" onclick="checkPassword()">Unlock Surprise ❤️</button>
+    <div id="lockError"></div>
+  </div>
+</div>
+
+<div id="siteContent">
+
+<script>
+var birthday = {
+  name: "Puju😘❤️",
+  songTitle: "I think this song will suits for us",
+  songArtist: "Ed Sheeran",
+
+  youtubeUrl: "https://www.youtube.com/watch?v=eSHjr7XW_k4",
+  youtubeEmbed: "https://www.youtube.com/embed/eSHjr7XW_k4",
+  questions: [
+    {
+      question:"Namma first time enga meet pannom? 👀",
+      answers:[
+        ["Vera oru Person moolama ❤️","correct"],
+        ["Unexpected meet😎","wrong"],
+        ["Planned meet ❤️","wrong"]
+      ]
+    },
+    {
+      question:"What would you miss most if I disappeared? 🥹",
+      answers:[
+        ["My messages","wrong"],
+        ["Everything 🥹","correct"],
+        ["My annoying calls 😂","wrong"]
+      ]
+    },
+    {
+      question:"Namma rendu perula first marriage yaarukku?",
+      answers:[
+        ["Enaku 😁❤️","wrong"],
+        ["Rendu perum same year ❤️","wrong"],
+        ["Unaku 😌❤️","correct"]
+      ]
+    },
+    {
+      question:"If someone hurt me, what would you do?😂",
+      answers:[
+        ["Fight them 💀","correct"],
+        ["Pretend to be calm but secretly plan revenge 😂","wrong"],
+        ["Give them a warning 😤","wrong"]
+      ]
+    },
+    {
+      question:"Unakku en kooda irundha favourite memory edhu? 🥹",
+      answers:[
+        ["bunk panithu suthunathu ah ❤️","correct"],
+        ["Random phone calls 😂","wrong"],
+        ["Everything 😭❤️","wrong"]
+      ]
+    }
+  ]
+};
+</script>
+
+<section class="hero">
+  <div class="container">
+    <div class="small-text">✨ A little surprise for my favourite person ✨</div>
+    <h1>Happy Birthday Puja</h1>
+    <div class="name" id="birthdayName">Puja ❤️</div>
+
+    <p class="intro">
+      In this huge world, meeting you and having you as my best friend is one of
+      the most beautiful things that happened to me. 🥹❤️
+      Ithu epadi nadanthuchi nu ithu varikum enaku therila.
+      One random day en life la ne vantha ipo oru best part ah irukua en life 🥹❤️
+      epovum happy ah iru love you lotss❤️
+      <br><br>
+      So today, this little website is just for you. 🎂✨
+    </p>
+
+    <div class="music-box">
+      <div class="music-title">🎵 <span id="songTitle">Our Special Song</span></div>
+      <div class="music-info"><span id="songArtist">Ed Sheeran</span> • Our Favourite Song ❤️</div>
+
+      <button type="button" onclick="toggleMusic()" id="musicButton">
+        ▶️ Play Our Song
+      </button>
+
+      <div class="youtube-player" id="youtubePlayer">
+        <iframe
+          id="youtubeFrame"
+          title="Our Special Song"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div class="scroll">↓ Scroll down, birthday girl 👀 ↓</div>
+  </div>
+</section>
+
+<section class="questions">
+  <div class="container">
+    <h2 class="section-title">💕 Oru Chinna Quiz</h2>
+    <p class="section-subtitle">Let's see how well you know our friendship 😌</p>
+    <div id="questionsContainer"></div>
+    <button class="submit-btn" type="button" onclick="checkAnswers()">💌 Submit Answers</button>
+    <div id="answerResult"></div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="section-title">📸 Our Memories</h2>
+    <p class="section-subtitle">Few moments... but a lifetime of memories ❤️</p>
+
+    <div class="memory-grid">
+      <div class="memory">
+        <img src="img/WhatsApp Image 2026-08-14 at 8.07.14 PM.jpeg" alt="Memory 1" loading="lazy">
+        <div class="caption">This pic are favt pic ❤️</div>
+      </div>
+
+      <div class="memory">
+        <img src="img/WhatsApp Image 2026-08-14 at 8.07.16 PM.jpeg" alt="Memory 2" loading="lazy">
+        <div class="caption">Random collection ❤️</div>
+      </div>
+
+      <div class="memory">
+        <img src="img/WhatsApp Image 2026-08-14 at 8.07.18 PM.jpeg" alt="Memory 3" loading="lazy">
+        <div class="caption">Forever favourite 🥹</div>
+      </div>
+
+      <div class="memory">
+        <img src="img/WhatsApp Image 2026-08-14 at 8.13.22 PM.jpeg" alt="Memory 4" loading="lazy">
+        <div class="caption">Just us ❤️</div>
+      </div>
+
+      <div class="memory">
+        <img src="img/WhatsApp Image 2026-08-14 at 8.13.25 PM.jpeg" alt="Memory 5" loading="lazy">
+        <div class="caption">Crazy memories 😂</div>
+      </div>
+
+      <div class="memory">
+        <img src="img/WhatsApp Image 2026-08-14 at 8.13.26 PM.jpeg" alt="Memory 6" loading="lazy">
+        <div class="caption">Our cutest photo 💕</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="section-title">🎂 Make A Wish</h2>
+    <div class="cake">🎂</div>
+    <p class="wish-text">
+      Close your eyes... 🥹<br><br>
+      Think about everything you want in life.<br>
+      Your dreams, your happiness, your future...<br><br>
+      Now make a wish and blow the candles. 🕯️✨
+    </p>
+    <button class="wish-btn" type="button" onclick="makeWish()">🕯️ Make My Wish</button>
+  </div>
+</section>
+
+<section class="final">
+  <div class="container">
+    <div class="message-box">
+      <h2 class="section-title">💌 One Last Thing...</h2>
+      <p>
+        Happy Birthday to the person who makes my life a little brighter,
+        a little crazier and a lot more beautiful. ❤️
+        <br><br>
+        Namma friendship la neraya memories irukku...
+        Sirippu, sanda, mokka jokes, random conversations,
+        crazy plans and so many unforgettable moments. 😂🥹
+        <br><br>
+        Life la enna nadandhalum, namma friendship ipdiye irukkanum
+        nu dhaan enoda biggest wish.
+        <br><br>
+        You deserve all the happiness in this world.
+        Un dreams ellam one by one achieve aaganum.
+        Un life full ah love, happiness and success irukkanum. ✨
+        Ne asa patha matri un life la sandhasom mathum than irukum
+        ellam negativity un life ah vitu poidum
+        <br><br>
+        This year will be the best year for you Luv ❤️!!
+        <br>
+        Not for today I'm always be there for you till ur last day oky
+        <br><br>
+        Thank you for being my best friend.
+        <br>
+        Thank you for staying.
+        <br>
+        Thank you for being YOU. ❤️
+        <br><br>
+        Once again...
+        <br><br>
+        <strong>HAPPY BIRTHDAY Thangoo! 🎂🎉❤️</strong>
+      </p>
+      <div class="signature">Forever your Chlw 🫶</div>
+    </div>
+  </div>
+</section>
+
+</div><
+
+<script>
+
+document.getElementById("birthdayName").textContent = birthday.name;
+document.getElementById("songTitle").textContent = birthday.songTitle;
+document.getElementById("songArtist").textContent = birthday.songArtist;
+
+
+var youtubePlayer = document.getElementById("youtubePlayer");
+var youtubeFrame = document.getElementById("youtubeFrame");
+var musicButton = document.getElementById("musicButton");
+var songOpen = false;
+
+function toggleMusic(){
+  if(!songOpen){
+    
+    youtubeFrame.src = birthday.youtubeEmbed + "?autoplay=1&rel=0";
+    youtubePlayer.style.display = "block";
+    musicButton.innerHTML = "⏸️ Hide Our Song";
+    songOpen = true;
+  }else{
+    youtubeFrame.src = "";
+    youtubePlayer.style.display = "none";
+    musicButton.innerHTML = "▶️ Play Our Song";
+    songOpen = false;
+  }
+}
+
+
+function renderQuiz(){
+  var questionsContainer = document.getElementById("questionsContainer");
+
+  if(!questionsContainer){
+    // Container not found yet - bail out safely instead of throwing.
+    return;
+  }
+  if(!birthday || !Array.isArray(birthday.questions)){
+    questionsContainer.innerHTML = "<p style='color:#ffacd8'>Quiz questions could not be loaded.</p>";
+    return;
+  }
+
+  questionsContainer.innerHTML = "";
+
+  birthday.questions.forEach(function(item, index){
+    var card = document.createElement("div");
+    card.className = "question-card";
+
+    var answersHTML = "";
+    item.answers.forEach(function(answer, aIndex){
+      var answerText = answer[0];
+      var answerValue = answer[1];
+      var inputId = "q" + index + "_a" + aIndex;
+      answersHTML +=
+        '<label class="answer" for="' + inputId + '">' +
+          '<input type="radio" id="' + inputId + '" name="question' + index + '" value="' + answerValue + '">' +
+          answerText +
+        '</label>';
+    });
+
+    card.innerHTML =
+      '<h3>' + (index + 1) + '. ' + item.question + '</h3>' +
+      answersHTML;
+
+    questionsContainer.appendChild(card);
+  });
+}
+
+function checkAnswers(){
+  if(!birthday || !Array.isArray(birthday.questions)) return;
+
+  var correct = 0;
+  var answered = 0;
+
+  birthday.questions.forEach(function(item, index){
+    var selected = document.querySelector('input[name="question' + index + '"]:checked');
+    if(selected){
+      answered++;
+      if(selected.value === "correct") correct++;
+    }
+  });
+
+  var result = document.getElementById("answerResult");
+
+  if(answered < birthday.questions.length){
+    result.innerHTML = "👀 Ellaa questions-um answer pannitu submit pannu! ❤️";
+    return;
+  }
+
+  result.innerHTML = "You got " + correct + " out of " + birthday.questions.length + " correct! ";
+
+  if(correct === birthday.questions.length){
+    result.innerHTML += "OMG! 🥹❤️ Perfect! You know our friendship so well!";
+    createConfetti(180);
+  }else if(correct >= Math.ceil(birthday.questions.length / 2)){
+    result.innerHTML += "Awww! 😌❤️ Not bad! Namma memories innum create pannalaam!";
+    createConfetti(80);
+  }else{
+    result.innerHTML += "Aiyo 😂 More memories venum pola! ❤️";
+  }
+}
+
+function makeWish(){
+  createConfetti(250);
+  alert("🎂✨ Wish Made! ✨🎂\n\nMay all your dreams come true! ❤️");
+}
+
+function createConfetti(amount){
+  amount = amount || 100;
+  var colors = ["#ff3f98","#ffcc00","#00e5ff","#7cff6b","#ffffff","#ff6b6b","#b967ff"];
+
+  for(var i = 0; i < amount; i++){
+    var confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.width = (Math.random() * 8 + 5) + "px";
+    confetti.style.height = (Math.random() * 15 + 5) + "px";
+    confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(confetti);
+    setTimeout(function(){ confetti.remove(); }, 5000);
+  }
+}
+
+function createHeart(){
+  var heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = ["❤️","💕","💖","💗","💓"][Math.floor(Math.random() * 5)];
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 5 + 6) + "s";
+  heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+  document.body.appendChild(heart);
+  setTimeout(function(){ heart.remove(); }, 10000);
+}
+
+var heartInterval = null;
+
+function startHearts(){
+  if(heartInterval) return;
+  heartInterval = setInterval(createHeart, 700);
+}
+
+renderQuiz();
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", renderQuiz);
+}
+</script>
+
+
+<script>
+// 🔑 CHANGE ONLY THE TEXT BELOW TO SET YOUR OWN PASSWORD 🔑
+const SECRET_PASSWORD = "This is my small gift for you pujaa";
+
+var lockScreen = document.getElementById("lockScreen");
+var siteContent = document.getElementById("siteContent");
+var passwordInput = document.getElementById("passwordInput");
+var lockError = document.getElementById("lockError");
+
+function unlockSite(){
+  lockScreen.classList.add("hidden");
+  siteContent.classList.add("revealed");
+  document.body.style.overflow = "auto";
+
+  
+  startHearts();
+  setTimeout(function(){ createConfetti(150); }, 500);
+}
+
+function checkPassword(){
+  var entered = passwordInput.value;
+
+  if(entered === SECRET_PASSWORD){
+    lockError.textContent = "";
+    unlockSite();
+  }else{
+    lockError.textContent = "Wrong password 😜 Try again ❤️";
+    lockError.classList.remove("shake");
+    
+    void lockError.offsetWidth;
+    lockError.classList.add("shake");
+    passwordInput.value = "";
+    passwordInput.focus();
+  }
+}
+
+passwordInput.addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    e.preventDefault();
+    checkPassword();
+  }
+});
+
+window.addEventListener("load", function(){
+  passwordInput.focus();
+});
+</script>
+
+</body>
+</html>
